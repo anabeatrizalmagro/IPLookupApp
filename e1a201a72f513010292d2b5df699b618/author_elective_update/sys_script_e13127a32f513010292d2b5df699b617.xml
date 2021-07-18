@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="DELETE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_482282_iplookup_ipaddressinfo</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Populate IP Address City</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[ try { 
+ var r = new sn_ws.RESTMessageV2('x_482282_iplookup.IPInfo', 'GetIPInfo');
+ r.setStringParameterNoEscape('ipaddress', current.ip_address);
+ r.setStringParameterNoEscape('specific_field ', 'geo');
+
+//override authentication profile 
+//authentication type ='basic'/ 'oauth2'
+//r.setAuthenticationProfile(authentication type, profile name);
+
+//set a MID server name if one wants to run the message on MID
+//r.setMIDServer('MY_MID_SERVER');
+
+//if the message is configured to communicate through ECC queue, either
+//by setting a MID server or calling executeAsync, one needs to set skip_sensor
+//to true. Otherwise, one may get an intermittent error that the response body is null
+//r.setEccParameter('skip_sensor', true);
+
+ var response = r.execute();
+ var responseBody = response.getBody();
+ var httpStatus = response.getStatusCode();
+	 
+	 var responseObj = JSON.parse(responseBody);
+	 current.city = responseObj.city;
+	 gs.info("City = " + current.city);
+	 current.update();
+}
+catch(ex) {
+ var message = ex.message;
+}]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-07-18 16:14:20</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>e13127a32f513010292d2b5df699b617</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Populate IP Address City</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="IPLookup" source="x_482282_iplookup">e1a201a72f513010292d2b5df699b618</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="IPLookup">e1a201a72f513010292d2b5df699b618</sys_scope>
+        <sys_update_name>sys_script_e13127a32f513010292d2b5df699b617</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-07-18 16:57:40</sys_updated_on>
+        <template/>
+        <when>async</when>
+    </sys_script>
+    <sys_translated_text action="DELETE" query="documentkey=e13127a32f513010292d2b5df699b617"/>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="IPLookup">e1a201a72f513010292d2b5df699b618</application>
+        <file_path/>
+        <instance_id>d537cff9dba357400e785d00cf9619da</instance_id>
+        <instance_name>dev67512</instance_name>
+        <name>sys_script_e13127a32f513010292d2b5df699b617</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sys_script"&gt;&lt;sys_script action="INSERT_OR_UPDATE"&gt;&lt;abort_action&gt;false&lt;/abort_action&gt;&lt;access&gt;package_private&lt;/access&gt;&lt;action_delete&gt;false&lt;/action_delete&gt;&lt;action_insert&gt;true&lt;/action_insert&gt;&lt;action_query&gt;false&lt;/action_query&gt;&lt;action_update&gt;true&lt;/action_update&gt;&lt;active&gt;true&lt;/active&gt;&lt;add_message&gt;false&lt;/add_message&gt;&lt;advanced&gt;true&lt;/advanced&gt;&lt;change_fields&gt;false&lt;/change_fields&gt;&lt;client_callable&gt;false&lt;/client_callable&gt;&lt;collection&gt;x_482282_iplookup_ipaddressinfo&lt;/collection&gt;&lt;condition/&gt;&lt;description/&gt;&lt;execute_function&gt;false&lt;/execute_function&gt;&lt;filter_condition/&gt;&lt;is_rest&gt;false&lt;/is_rest&gt;&lt;message/&gt;&lt;name&gt;Populate IP Address City&lt;/name&gt;&lt;order&gt;100&lt;/order&gt;&lt;priority&gt;100&lt;/priority&gt;&lt;rest_method/&gt;&lt;rest_method_text/&gt;&lt;rest_service/&gt;&lt;rest_service_text/&gt;&lt;rest_variables/&gt;&lt;role_conditions/&gt;&lt;script&gt;&lt;![CDATA[ try { 
+ var r = new sn_ws.RESTMessageV2('x_482282_iplookup.IPInfo', 'GetIPInfo');
+ r.setStringParameterNoEscape('ipaddress', current.ip_address);
+ r.setStringParameterNoEscape('specific_field ', 'geo');
+
+//override authentication profile 
+//authentication type ='basic'/ 'oauth2'
+//r.setAuthenticationProfile(authentication type, profile name);
+
+//set a MID server name if one wants to run the message on MID
+//r.setMIDServer('MY_MID_SERVER');
+
+//if the message is configured to communicate through ECC queue, either
+//by setting a MID server or calling executeAsync, one needs to set skip_sensor
+//to true. Otherwise, one may get an intermittent error that the response body is null
+//r.setEccParameter('skip_sensor', true);
+
+ var response = r.execute();
+ var responseBody = response.getBody();
+ var httpStatus = response.getStatusCode();
+	 
+	 var responseObj = JSON.parse(responseBody);
+	 current.city = responseObj.city;
+	 gs.info("City = " + current.city);
+	 current.update();
+}
+catch(ex) {
+ var message = ex.message;
+}]]&gt;&lt;/script&gt;&lt;sys_class_name&gt;sys_script&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2021-07-18 16:14:20&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;e13127a32f513010292d2b5df699b617&lt;/sys_id&gt;&lt;sys_mod_count&gt;6&lt;/sys_mod_count&gt;&lt;sys_name&gt;Populate IP Address City&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="IPLookup" source="x_482282_iplookup"&gt;e1a201a72f513010292d2b5df699b618&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="IPLookup"&gt;e1a201a72f513010292d2b5df699b618&lt;/sys_scope&gt;&lt;sys_update_name&gt;sys_script_e13127a32f513010292d2b5df699b617&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2021-07-18 16:57:40&lt;/sys_updated_on&gt;&lt;template/&gt;&lt;when&gt;async&lt;/when&gt;&lt;/sys_script&gt;&lt;sys_translated_text action="delete_multiple" query="documentkey=e13127a32f513010292d2b5df699b617"/&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>331131543</payload_hash>
+        <record_name>Populate IP Address City</record_name>
+        <reverted_from/>
+        <source>e5a201a72f513010292d2b5df699b61a</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-07-18 16:57:41</sys_created_on>
+        <sys_id>626b6b6b2f513010292d2b5df699b616</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>17aba8d4f880000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-07-18 16:57:41</sys_updated_on>
+        <type>Business Rule</type>
+        <update_guid>6a6b6b6b44513010b6a02042af6e2115</update_guid>
+        <update_guid_history>6a6b6b6b44513010b6a02042af6e2115:331131543,5958a7e711513010de8597808f8cdae2:1430793850,6127e7a76d5130106661395cbb7c5972:-1918928012,de152367205130107c053b1f3d5cda16:-772244716,60c46f27db5130108a53083764af7367:1323296181,f293afe39b51301050b9985fb1821363:1047125041,b371e7a3ed513010cb546ab9cd302ee6:508169209</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2021-07-18 16:58:40</sys_created_on>
+        <sys_db_object display_value="" name="sys_script">sys_script</sys_db_object>
+        <sys_id>465286facd874eb68879e15370fb3fe1</sys_id>
+        <sys_metadata>e13127a32f513010292d2b5df699b617</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Populate IP Address City</sys_name>
+        <sys_package display_value="IPLookup" source="x_482282_iplookup">e1a201a72f513010292d2b5df699b618</sys_package>
+        <sys_parent display_value="IPAddressInfo">1c90ab632f513010292d2b5df699b691</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="IPLookup">e1a201a72f513010292d2b5df699b618</sys_scope>
+        <sys_scope_delete display_value="">185e8053f3df4e6688dcf58c82417451</sys_scope_delete>
+        <sys_update_name>sys_script_e13127a32f513010292d2b5df699b617</sys_update_name>
+        <sys_update_version display_value="sys_script_e13127a32f513010292d2b5df699b617">626b6b6b2f513010292d2b5df699b616</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2021-07-18 16:58:40</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
